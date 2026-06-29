@@ -44,8 +44,8 @@ export class WardrobeItemLooksModal {
         <div class="wilm-card product-card">
           <div class="product-image">
             ${it.imageUrl
-              ? `<img src="${it.imageUrl}" alt="${it.name || ''}" />`
-              : `<div class="warm-img-empty"></div>`}
+              ? `<img src="${it.imageUrl}" alt="${it.name || ''}" style="width:100%;height:100%;object-fit:cover;border-radius:10px;" />`
+              : `<div class="warm-img-empty" style="width:100%;aspect-ratio:1;background:#e8f0eb;border-radius:10px;"></div>`}
           </div>
           <div class="product-header">
             <h3 class="product-title" style="font-size:12px">${it.name || "Sem nome"}</h3>
