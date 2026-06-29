@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Inventário da Casa</title>
+  
+  <link rel="stylesheet" href="./css/variables.css" />
+  
+  <link rel="stylesheet" href="./css/components.css" />
+  
+  <link rel="stylesheet" href="./css/main.css" />
+  <link rel="stylesheet" href="./css/toast.css" />
+  <link rel="stylesheet" href="./css/loading.css" />
+  <link rel="stylesheet" href="./css/admin.css" />
+  <link rel="stylesheet" href="./css/wardrobe.css" />
+  
+  <link rel="manifest" href="./manifest.json" />
+  <meta name="theme-color" content="#3a7d5a" />
+</head>
+
+<body>
+  
+  <div id="authScreen" data-mode="login">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="auth-logo"></div>
+        <h1 class="auth-title" id="authTitle">Entrar</h1>
+        <p class="auth-subtitle" id="authSubtitle">Use seu nome ou e-mail para acessar</p>
+      </div>
+      
+      
+      <div id="authNameGroup" style="display:none">
+        <input id="authName" type="text" placeholder="Seu nome" autocomplete="name" />
+      </div>
+      
+      
+      <input id="authNameOrEmail" type="text" placeholder="Nome ou e-mail" autocomplete="email" />
+      
+      
+      <div class="password-group">
+        <input id="authPassword" type="password" placeholder="Senha" autocomplete="current-password" />
+        <button type="button" id="togglePasswordBtn" class="toggle-password-btn" aria-label="Mostrar senha">ver</button>
+      </div>
+      
+      <button id="loginBtn" class="auth-main-btn">Entrar</button>
+      
+      <button id="toggleAuthBtn" class="auth-toggle-btn">Não tem conta? Cadastre-se</button>
+    </div>
+  </div>
+  
+  <section id="appScreen" class="hidden">
+    <div class="app-container">
+      <header class="app-header">
+        <section class="navigation-section">
+          <div class="top-menu-scroll">
+            <button id="inventoryTab" class="nav-btn active">Inventário</button>
+            
+            <button id="historyTab" class="nav-btn">Histórico</button>
+            
+            <button id="financeTab" class="nav-btn">Finanças</button>
+            
+            <button id="wardrobeTab" class="nav-btn">
+              Roupas
+            </button>
+            
+            <button id="logoutBtn" class="danger-btn">
+              Sair
+            </button>
+          </div>
+        </section>
+        
+        <h1 id="welcomeText"></h1>
+        
+        <p class="subtitle">Inventário da Casa</p>
+      </header>
+      
+      <section id="inventoryScreen">
+        <section class="search-section">
+          <input id="searchInput" type="text" placeholder="Pesquisar produto" />
+        </section>
+        
+        <section class="filter-section">
+          <button id="allFilter" class="filter-btn active">Todos</button>
+          
+          <button id="essentialFilter" class="filter-btn">Essenciais</button>
+          
+          <button id="nonEssentialFilter" class="filter-btn">Não Essenciais</button>
+        </section>
+        
+        <section class="actions-section">
+          <button id="addProductBtn">Adicionar Produto</button>
+          
+          <button id="exportListBtn">Exportar Lista</button>
+          
+          <button id="importListBtn">Importar Nota</button>
+          
+          <input id="importFileInput" type="file" accept=".txt" hidden />
+        </section>
+        
+        
+        <div class="list-wrapper">
+          
+          <section id="productsContainer" class="products-container">
+            <div class="empty-state">Nenhum produto cadastrado</div>
+          </section>
+          
+        </div>
+        
+      </section>
+      
+      <section id="historyScreen" class="hidden">
+        <div class="card">
+          <div class="history-header">
+            <h2>Histórico</h2>
+            
+            <button id="clearHistoryBtn" class="secondary-btn">Limpar</button>
+          </div>
+          
+          <div id="historyContainer">Nenhum registro disponível</div>
+        </div>
+      </section>
+      
+      <section id="financeScreen" class="hidden">
+        <div class="finance-summary">
+          <div class="finance-box">
+            <span> Entradas </span>
+            
+            <strong id="incomeTotal"> R$ 0,00 </strong>
+          </div>
+          
+          <div class="finance-box">
+            <span> Saídas </span>
+            
+            <strong id="expenseTotal"> R$ 0,00 </strong>
+          </div>
+          
+          <div class="finance-box">
+            <span> Saldo </span>
+            
+            <strong id="balanceTotal"> R$ 0,00 </strong>
+          </div>
+        </div>
+        
+        <section id="financeFilters" class="finance-filters"></section>
+        
+        <section class="search-section">
+          <input id="financeSearch" type="text" placeholder="Pesquisar lançamento" />
+        </section>
+        
+        <section class="actions-section">
+          <button id="addFinanceBtn">Adicionar Lançamento</button>
+          
+          <button id="addCardBtn">Cadastrar Cartão</button>
+          
+          <button id="viewCardsBtn" class="secondary-btn">Visualizar Cartões</button>
+        </section>
+        
+        <div class="list-wrapper">
+          <section id="financeContainer">
+            <div class="empty-state">Nenhum lançamento cadastrado</div>
+          </section>
+        </div>
+        
+        <div class="finance-section">
+          <h2 class="finance-title">Dívidas</h2>
+          <button id="addDebtBtn">Adicionar Dívida</button>
+          
+          <div class="list-wrapper">
+            <div id="debtContainer">
+              <div class="empty-state">Nenhuma dívida cadastrada</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section id="wardrobeScreen" class="hidden">
+        <div id="wardrobeHeader"></div>
+        <div id="wardrobeMontador"></div>
+        <div id="wardrobeArmario" class="hidden"></div>
+        <div id="wardrobeStats" class="hidden"></div>
+      </section>
+      
+      <div id="financeModal" class="modal-overlay hidden">
+        <div class="modal">
+          <h2>Novo Lançamento</h2>
+          
+          <input id="financeDescription" type="text" placeholder="Descrição" />
+          
+          <input id="financeValue" type="text" inputmode="numeric" placeholder="R$ 0,00" />
+          
+          <select id="financeType">
+            <option value="income">Entrada</option>
+            
+            <option value="expense">Saída</option>
+            
+            <option value="card">Cartão</option>
+          </select>
+          
+          <select id="financeCard" class="hidden"></select>
+          
+          <div id="installmentContainer" class="hidden">
+            <label> Parcelado? </label>
+            
+            <select id="installmentType">
+              <option value="no">Não</option>
+              
+              <option value="yes">Sim</option>
+            </select>
+          </div>
+          
+          <select id="installments" class="hidden"></select>
+          
+          <div id="customInstallmentContainer" class="hidden">
+            <input id="customInstallments" type="number" min="25" placeholder="Quantidade de parcelas" />
+            
+            <button id="cancelCustomInstallments" type="button">Cancelar</button>
+          </div>
+          
+          <div id="installmentPreview" class="installment-preview hidden"></div>
+          
+          <select id="financeCategory">
+            <option>Trabalho</option>
+            
+            <option>Mercado</option>
+            
+            <option>Casa</option>
+            
+            <option>Saúde</option>
+            
+            <option>Transporte</option>
+            
+            <option>Lazer</option>
+            
+            <option>Outros</option>
+          </select>
+          
+          <input id="financeDate" type="date" />
+          
+          <div class="modal-actions">
+            <button id="cancelFinanceBtn" class="secondary-btn">Cancelar</button>
+            
+            <button id="saveFinanceBtn">Salvar</button>
+            
+            <button id="deleteFinanceBtn" class="danger-btn hidden">Excluir</button>
+          </div>
+        </div>
+      </div>
+      
+      <div id="purchaseImportModal" class="modal-overlay hidden">
+        
+        <div class="modal">
+          
+          <h2>Importar Compras</h2>
+          
+          <textarea id="receiptText" placeholder="Cole o texto da nota ou recibo aqui..." style="width:100%;min-height:130px;max-height:260px;padding:14px;border:1.5px solid #c8ddd0;border-radius:14px;font-family:system-ui,-apple-system,sans-serif;font-size:14px;line-height:1.5;resize:vertical;box-sizing:border-box;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#3a7d5a'" onblur="this.style.borderColor='#c8ddd0'"></textarea>
+          
+          <div id="purchasePreview" class="hidden">
+          </div>
+          
+          <input type="file" id="receiptImage" accept="image/*">
+          
+          <div class="modal-actions">
+            
+            <button id="cancelPurchaseImportBtn" class="secondary-btn">
+            
+              Cancelar
+              
+            </button>
+            
+            <button id="processPurchaseBtn">
+            
+              Processar Compra
+              
+            </button>
+            
+          </div>
+          
+          
+        </div>
+      </div>
+      
+      <div id="cardModal" class="modal-overlay hidden">
+        <div class="modal">
+          <h2>Novo Cartão</h2>
+          
+          <input id="cardName" type="text" placeholder="Nome" />
+          
+          <input id="cardLimit" type="text" inputmode="numeric" placeholder="R$ 0,00" />
+          
+          <input id="cardCloseDay" type="number" placeholder="Dia fechamento" />
+          
+          <input id="cardDueDay" type="number" placeholder="Dia vencimento" />
+          
+          <div class="modal-actions">
+            <button id="cancelCardBtn" class="secondary-btn">Cancelar</button>
+            
+            <button id="saveCardBtn">Salvar</button>
+          </div>
+        </div>
+      </div>
+      
+      <div id="cardsListModal" class="modal-overlay hidden">
+        <div class="modal">
+          <h2>Meus Cartões</h2>
+          
+          <div id="cardsListContainer"></div>
+          
+          <button id="closeCardsListBtn">Fechar</button>
+        </div>
+      </div>
+      
+      <div id="editCardModal" class="modal-overlay hidden">
+        <div class="modal">
+          <h2>Editar Cartão</h2>
+          
+          <input id="editCardName" type="text" />
+          
+          <input id="editCardLimit" type="text" />
+          
+          <input id="editCardCloseDay" type="number" />
+          
+          <input id="editCardDueDay" type="number" />
+          
+          <div class="modal-actions">
+            <button id="cancelEditCardBtn">Cancelar</button>
+            
+            <button id="saveEditCardBtn">Salvar</button>
+            
+            <button id="deleteCardBtn" class="danger-btn">Excluir</button>
+          </div>
+        </div>
+      </div>
+      
+      <div id="debtModal" class="modal-overlay hidden">
+        <div class="modal">
+          <h2>Nova Dívida</h2>
+          
+          <input id="debtDescription" placeholder="Descrição" />
+          
+          <input id="debtCreditor" placeholder="Credor" />
+          
+          <input id="debtValue" type="text" inputmode="numeric" placeholder="R$ 0,00" />
+          
+          <div id="debtInstallmentContainer">
+            <select id="debtInstallments" class="hidden">
+              <option value="">Selecione</option>
+            </select>
+          </div>
+          
+          <div id="debtCustomInstallmentContainer" class="hidden">
+            <input id="debtCustomInstallments" type="number" placeholder="Quantidade de parcelas" />
+            
+            <button id="cancelDebtCustomInstallments">Cancelar</button>
+          </div>
+          
+          <div id="debtInstallmentPreview" class="installment-preview hidden"></div>
+          
+          <div class="modal-actions">
+            <button id="cancelDebtBtn">Cancelar</button>
+            
+            <button id="saveDebtBtn">Salvar</button>
+          </div>
+        </div>
+      </div>
+      
+      <div id="editDebtModal" class="modal-overlay hidden">
+        
+        <div class="modal">
+          
+          <h2>
+            
+            Editar Dívida
+            
+          </h2>
+          
+          <input id="editDebtDescription" placeholder="Descrição">
+          
+          <input id="editDebtCreditor" placeholder="Credor (opcional)">
+          
+          <input id="editDebtValue" type="text" inputmode="numeric" placeholder="Ex: 1500,00">
+          
+          <input id="editDebtInstallments" type="number" min="2" placeholder="Parcelas">
+          
+          <div id="editDebtInstallmentPreview" class="
+    installment-preview
+    ">
+            
+          </div>
+          
+          <div class="modal-actions">
+            
+            <button id="deleteDebtBtn" class="danger-btn">
+            
+              Excluir
+              
+            </button>
+            
+            <button id="cancelEditDebtBtn" class="secondary-btn">
+            
+              Cancelar
+              
+            </button>
+            
+            <button id="saveEditDebtBtn">
+            
+              Salvar
+              
+            </button>
+            
+          </div>
+          
+        </div>
+        
+      </div>
+      
+      <div id="payDebtModal" class="
+    modal-overlay
+    hidden
+    ">
+        
+        <div class="modal">
+          
+          <h2>
+            
+            Pagar Parcela
+            
+          </h2>
+          
+          <input id="payDebtTitle" readonly>
+          
+          <input id="payDebtInstallment" readonly>
+          
+          <input id="payDebtValue" readonly>
+          
+          <input id="debtProofFile" type="file" accept=".pdf,.png">
+          
+          <h3>Comprovantes</h3>
+          
+          <div id="debtProofHistory" class="proof-history"></div>
+          
+          <div class="modal-actions">
+            
+            <button id="editDebtBtn" class="secondary-btn">
+            
+              Editar Dívida
+              
+            </button>
+            
+            <button id="cancelPayDebtBtn" class="secondary-btn">
+            
+              Cancelar
+              
+            </button>
+            
+            <button id="confirmPayDebtBtn">
+            
+              Confirmar
+              
+            </button>
+            
+          </div>
+          
+        </div>
+        
+      </div>
+      
+      <script type="module" src="./js/main.js"></script>
+      
+      <script src="https://unpkg.com/tesseract.js@5/dist/tesseract.min.js"></script>
+      
+      <div id="productModal" class="modal-overlay hidden">
+        <div class="modal">
+          <h2>Novo Produto</h2>
+          
+          <input id="productName" type="text" placeholder="Nome do produto" />
+          
+          <select id="productCategory">
+            <option value="">Categoria</option>
+            
+            <option value="Mercado">Perecível</option>
+            
+            <option value="Limpeza">Não perecível</option>
+            
+            <option value="Higiene">Limpeza</option>
+            
+            <option value="Bebidas">Bebidas</option>
+          </select>
+          
+          <input id="productQuantity" type="number" min="0" placeholder="Quantidade" />
+          
+          
+          <div id="productImageSection" style="display:none">
+            <label class="image-label">Trocar foto do produto</label>
+            <img id="productImagePreview" src="" alt="Foto atual" style="display:none;width:100%;max-height:160px;object-fit:cover;border-radius:12px;margin-bottom:8px" />
+            <input id="productImage" type="file" accept="image/*" />
+          </div>
+          
+          <label class="essential-line">
+            <input id="productEssential" type="checkbox" />
+            
+            <span> Item essencial </span>
+          </label>
+          
+          <div class="modal-actions">
+            <button id="cancelProductBtn" class="secondary-btn">Cancelar</button>
+            
+            <button id="saveProductBtn">Salvar</button>
+            
+            <button id="deleteProductBtn" class="danger-btn hidden">Excluir Produto</button>
+          </div>
+        </div>
+      </div>
+      
+      <div id="missingProductsModal" class="modal-overlay hidden">
+        <div class="modal">
+          <h2>Itens não encontrados</h2>
+          
+          <div id="missingProductsList" class="missing-products-list"></div>
+          
+          <div id="selectedCounter">0 itens selecionados</div>
+          
+          <div class="modal-actions">
+            <button id="ignoreMissingBtn" class="secondary-btn">Ignorar</button>
+            
+            <button id="createMissingBtn">Criar Selecionados</button>
+          </div>
+        </div>
+      </div>
+      
+      
+      
+      <div id="wardrobeItemModal" class="modal-overlay hidden">
+        <div class="modal">
+          <h2 class="wm-title">Nova Peça</h2>
+          
+          
+          <div class="wm-photo-area">
+            <img id="wmImagePreview" src="" alt="" class="wm-img-preview hidden" />
+            <label class="wm-photo-label" for="wmImageFile">Selecionar foto
+              <span id="wmPhotoLabelText"></span>
+            </label>
+            <input type="file" id="wmImageFile" accept="image/*" class="wm-file-input" />
+          </div>
+          
+          
+          <input id="wmOccasion" type="text" placeholder="Ocasião:" style="margin-bottom:12px" />
+          
+          
+          <button id="wmAnalyzeBtn" class="wm-analyze-btn">Validar</button>
+          
+          
+          <input id="wmName" type="text" placeholder="Nome da peça" style="margin-bottom:12px" disabled />
+          
+          <select id="wmType" style="margin-bottom:12px" disabled>
+            <option value="">Tipo da peça</option>
+            <option value="blusa">Blusa, Camiseta</option>
+            <option value="calca">Calça, Shorts e Saia</option>
+            <option value="vestido">Vestido, Macacão</option>
+            <option value="sapato">Sapato, Tênis, Sandália</option>
+            <option value="sobreposicao">Sobreposição</option>
+          </select>
+          
+          <select id="wmColor" style="margin-bottom:16px" disabled>
+            <option value="">Cor principal</option>
+            <option value="preto">Preto</option>
+            <option value="branco">Branco</option>
+            <option value="cinza">Cinza</option>
+            <option value="azul">Azul</option>
+            <option value="jeans">Jeans</option>
+            <option value="rosa">Rosa</option>
+            <option value="vermelho">Vermelho</option>
+            <option value="verde">Verde</option>
+            <option value="amarelo">Amarelo</option>
+            <option value="laranja">Laranja</option>
+            <option value="bege">Bege</option>
+            <option value="vinho">Vinho</option>
+            <option value="marrom">Marrom</option>
+            <option value="nude">Nude</option>
+          </select>
+          
+          <div class="modal-actions">
+            <button id="wmCancelBtn" class="secondary-btn">Cancelar</button>
+            <button id="wmSaveBtn" disabled>Salvar</button>
+            <button id="wmDeleteBtn" class="danger-btn hidden">Excluir</button>
+          </div>
+          <button id="wmLooksBtn" class="wm-looks-btn hidden">Ver Looks</button>
+        </div>
+      </div>
+      
+      
+      <div id="toastContainer"></div>
+      
+      <div id="loadingOverlay" class="hidden">
+        <div class="loading-spinner"></div>
+        <div id="loadingText">Carregando...</div>
+      </div>
+      
+      <script>
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('./sw.js');
+        }
+      </script>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "Inventário da Casa",
+  "short_name": "Inventário",
+  "description": "Controle de finanças, inventário, dívidas e guarda-roupa",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f4f7f4",
+  "theme_color": "#3a7d5a",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "assets/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

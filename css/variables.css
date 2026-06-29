@@ -1,0 +1,14 @@
+:root {
+  --primary:        #3a7d5a;
+  --primary-light:  #e8f4ee;
+  --primary-dark:   #2d6147;
+  --background:     #f4f7f4;
+  --card:           #ffffff;
+  --text:           #1a2e22;
+  --text-secondary: #6b8070;
+  --border:         #c8ddd0;
+  --success:        #3a7d5a;
+  --danger:         #c0392b;
+  --warning:        #d4940a;
+  --radius:         20px;
+}

@@ -1,0 +1,398 @@
+
+
+#wardrobeScreen { padding: 0; }
+
+#wardrobeHeader {
+  padding: 14px 16px 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wh-tabs-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.wh-tab {
+  padding: 11px 6px;
+  border: none;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: -0.2px;
+  transition: background 0.15s, color 0.15s, transform 0.1s;
+
+  background: var(--primary-dark, #2d4a38);
+  color: #ffffff;
+}
+.wh-tab--active {
+  background: var(--primary, #3a7d5a);
+  color: #ffffff;
+}
+.wh-tab:active { transform: scale(0.97); opacity: 0.88; }
+
+.wh-controls-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.wh-ctrl-btn {
+  padding: 9px 6px;
+  border: none;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: -0.2px;
+  transition: background 0.15s, transform 0.1s;
+  background: var(--primary-light, #e8f4ee);
+  color: #2d4a38;
+  width: 100%;
+}
+.wh-ctrl-btn:active { transform: scale(0.97); opacity: 0.85; }
+.wh-ctrl-btn--active { background: var(--primary); color: #fff; font-weight: 700; }
+
+#wardrobeMontador,
+#wardrobeArmario,
+#wardrobeStats {
+  padding: 16px;
+}
+
+.warm-group-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary, #6b8070);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin: 14px 0 8px;
+}
+
+.warm-color-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.warm-color-dot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.12);
+  display: inline-block;
+  flex-shrink: 0;
+}
+.warm-img-empty {
+  width: 100%; height: 100%;
+  background: var(--background, #f4f7f4);
+  border-radius: 14px;
+}
+
+.wmont-slots {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.wmont-slot { display: flex; align-items: center; }
+
+.wmont-slot-area {
+  flex: 1;
+  background: var(--card, #fff);
+  border-radius: 16px;
+  padding: 10px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+
+  border: none;
+}
+.wmont-slot-area:active { transform: scale(0.97); }
+.wmont-slot-area--filled {
+  box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+}
+
+.wmont-img {
+  width: 100%;
+  max-height: 130px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.wmont-empty-tap {
+  width: 100%;
+  height: 90px;
+  background: var(--background, #f4f7f4);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+.wmont-tap-icon  { font-size: 26px; color: var(--primary, #3a7d5a); font-weight: 300; line-height: 1; }
+.wmont-tap-label { font-size: 11px; color: var(--text-secondary, #6b8070); font-weight: 500; }
+
+.wmont-item-name {
+  font-size: 13px; font-weight: 500;
+  color: var(--text, #1a2e22);
+  text-align: center; letter-spacing: -0.2px;
+}
+
+.wmont-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.wmont-btn {
+  padding: 14px 8px;
+  border: none;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: -0.2px;
+  transition: opacity 0.15s, transform 0.12s;
+  width: 100%;
+}
+.wmont-btn:active { opacity: 0.8; transform: scale(0.98); }
+.wmont-confirm { background: var(--primary, #3a7d5a); color: #fff; }
+.wmont-add     { background: var(--primary-dark, #2d4a38); color: #fff; }
+
+#wSlotPickerModal .modal { max-height: 80vh; }
+
+.wslot-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-height: 52vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 2px 0;
+}
+
+.wslot-item {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: transform 0.1s;
+  border-radius: 24px;
+  border: 2.5px solid transparent;
+}
+.wslot-item:active { transform: scale(0.95); }
+.wslot-item-selected { border-color: var(--primary, #3a7d5a); }
+.wslot-item-none     { border-color: var(--border, #c8ddd0); }
+
+.wslot-item .product-card {
+  height: 100%;
+  border-radius: 20px;
+  box-shadow: none;
+}
+.wslot-item .product-image { aspect-ratio: 1; }
+
+.wslot-img {
+  width: 100%; aspect-ratio: 1;
+  object-fit: cover; border-radius: 10px;
+}
+.wslot-img-empty {
+  width: 100%; aspect-ratio: 1;
+  background: var(--background, #f4f7f4);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 700;
+  color: var(--text-secondary, #6b8070);
+}
+.wslot-none-icon { font-size: 18px; font-weight: 400; color: var(--text-secondary, #6b8070); }
+.wslot-name {
+  font-size: 11px; font-weight: 500;
+  color: var(--text, #1a2e22);
+  text-align: center; line-height: 1.3;
+  word-break: break-word; padding: 4px 4px 2px;
+}
+.wslot-empty {
+  text-align: center; font-size: 14px;
+  color: var(--text-secondary, #6b8070);
+  line-height: 1.6; padding: 8px 0 4px;
+}
+
+.wstat-summary {
+  display: flex; gap: 12px; margin-bottom: 8px;
+}
+.wstat-tile {
+  flex: 1; background: var(--card, #fff);
+  border-radius: 16px; padding: 16px;
+  text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+}
+.wstat-num { font-size: 28px; font-weight: 700; color: var(--text, #1a2e22); }
+.wstat-lbl { font-size: 12px; color: var(--text-secondary, #6b8070); margin-top: 2px; }
+
+.wstat-section { margin-top: 16px; }
+.wstat-title {
+  font-size: 13px; font-weight: 700;
+  color: var(--text-secondary, #6b8070);
+  text-transform: uppercase; letter-spacing: 0.4px;
+  margin-bottom: 8px;
+}
+.wstat-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border, #c8ddd0);
+}
+.wstat-row:last-child { border-bottom: none; }
+.wstat-thumb       { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
+.wstat-thumb-empty { width: 40px; height: 40px; border-radius: 8px; background: var(--background); flex-shrink: 0; }
+.wstat-info { flex: 1; }
+.wstat-name { font-size: 14px; font-weight: 500; color: var(--text, #1a2e22); letter-spacing: -0.2px; }
+.wstat-sub  { font-size: 12px; color: var(--text-secondary, #6b8070); margin-top: 1px; }
+
+#wardrobeItemModal .modal { max-height: 85vh; overflow-y: auto; }
+
+.wm-title { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
+
+#wmImagePreview {
+  width: 100%; max-height: 180px;
+  object-fit: cover; border-radius: 14px; margin-bottom: 10px;
+}
+
+.wm-photo-area  { position: relative; margin-bottom: 12px; }
+.wm-img-preview { width: 100%; max-height: 200px; object-fit: cover; border-radius: 14px; margin-bottom: 8px; display: block; }
+.wm-img-preview.hidden { display: none; }
+
+.wm-photo-label {
+  display: flex; align-items: center; justify-content: center;
+  padding: 14px;
+  border: 2px dashed var(--border, #c8ddd0);
+  border-radius: 14px; cursor: pointer;
+  background: var(--background, #f4f7f4);
+  color: var(--primary, #3a7d5a);
+  font-size: 14px; font-weight: 600;
+  transition: border-color 0.15s, background 0.15s;
+  letter-spacing: -0.2px;
+}
+.wm-photo-label:active { background: var(--border, #c8ddd0); }
+.wm-file-input { position: absolute; width: 0; height: 0; opacity: 0; overflow: hidden; }
+
+.wm-analyze-btn {
+  width: 100%; padding: 13px;
+  background: var(--primary, #3a7d5a); color: #fff;
+  border: none; border-radius: 14px;
+  font-size: 15px; font-weight: 600; cursor: pointer;
+  margin-bottom: 16px; letter-spacing: -0.2px;
+  transition: opacity 0.15s, transform 0.12s;
+}
+.wm-analyze-btn:active   { opacity: 0.85; transform: scale(0.99); }
+.wm-analyze-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+.wm-looks-btn {
+  width: 100%; padding: 12px;
+  background: var(--primary-dark, #2d4a38);
+  color: #fff;
+  border: none; border-radius: 14px;
+  font-size: 14px; font-weight: 700; cursor: pointer;
+  margin-top: -4px;
+  transition: background 0.15s, transform 0.12s;
+  letter-spacing: -0.2px;
+}
+.wm-looks-btn:active { background: var(--primary-dark, #2d4a38); transform: scale(0.98); }
+
+#wmName:disabled, #wmType:disabled, #wmColor:disabled {
+  opacity: 0.4; cursor: not-allowed; background: var(--background, #f4f7f4);
+}
+
+.wilm-overlay {
+  z-index: 1100;
+}
+
+.wilm-modal {
+  max-height:88vh;
+  display: flex;
+  flex-direction: columns;
+  overflow: hidden;
+}
+
+.wilm-modal>h2 {
+  flex-shrink: 0;
+}
+
+.wilm-modal>.modal-actions {
+  flex-shrink: 0;
+}
+
+.wilm-count-pill {
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.wilm-scroll-area {
+  flex: 1 1 auto;
+  overflow-x: auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 4px 2px 12px;
+  scrollbar-width: thin;
+  display: flex;
+  flex-direction: row;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.wilm-scroll-area::-webkit-scrollbar { width: 4px; height: 4px; } 
+.wilm-scroll-area::-webkit-scrollbar-thumb { background: var(--border, #c8ddd0); border-radius: 4px; }
+
+.wilm-look-col {
+  flex: 0 0 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wilm-look-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border, #c8ddd0);
+}
+.wilm-look-num  { font-size: 13px; font-weight: 700; color: var(--text, #1a2e22); }
+.wilm-look-date { font-size: 11px; color: var(--text-secondary, #6b8070); }
+
+.wilm-cards-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wilm-card {
+  width: 100%;
+  border-radius: 16px !important;
+  padding: 6px !important;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08) !important;
+}
+.wilm-card .product-image {
+  border-radius: 10px;
+  margin-bottom: 6px;
+}
+.wilm-card .product-title {
+  font-size: 11px !important;
+  line-height: 1.3;
+}
+
+.wilm-empty {
+  text-align: center;
+  padding: 16px 8px;
+  color: var(--text-secondary, #6b8070);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.wilm-empty-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
