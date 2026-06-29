@@ -1,5 +1,4 @@
-const BACKEND_URL = "https://app.base44.com/api/apps/6a3aba32b6b137e32d98faf7/functions/wardrobeAnalyze";
-
+const BACKEND_URL = "https://superagent-2d98faf7.base44.app/functions/wardrobeAnalyze";
 export class WardrobeAIService {
   static async analyze(imageDataUrl, occasionHint = "") {
     const response = await fetch(BACKEND_URL, {
