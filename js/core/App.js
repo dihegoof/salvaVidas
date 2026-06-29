@@ -107,6 +107,7 @@ import {
   WardrobeItemLooksModal
 } from "../ui/wardrobe/WardrobeItemLooksModal.js";
 export class App {
+  static _buttonsBound = false;
   static async init() {
     LoadingManager.show("Iniciando...");
     try {
@@ -188,7 +189,10 @@ export class App {
           WardrobeManager._looks = WardrobeManager._looks.filter(l => l.id !== look.id);
         }
       });
-      this._bindButtons();
+      if (!this._buttonsBound) {
+        this._bindButtons();
+        this._buttonsBound = true;
+      }
       this.openApp(displayName);
     } catch (err) {
       console.error("Erro ao iniciar app:", err);
