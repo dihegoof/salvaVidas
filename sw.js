@@ -1,4 +1,4 @@
-const CACHE = 'salvaVidas-v2';
+const CACHE = 'salvaVidas-v2.1';
 const FILES = [
   './',
   './index.html',
